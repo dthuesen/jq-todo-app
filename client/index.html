@@ -1,50 +1,107 @@
-<% include partials/header %>
+<!DOCTYPE html>
 
-	<div class="row">
-		<div class="col-md-6 col-md-offset-3">
-			
-			<!-- NEW ITEM FORM -->
-			<h1>New Item</h1>
-			<form action="/todos" method="POST" id="new-todo-form">
-				<div class="form-group">
-					<label for="new-item-input">Item Text</label>
-					<input type="text" name="todo[text]" class="form-control" id="new-item-input" placeholder="Enter new task...">
-				</div>
-				<button class="btn btn-primary">Create Item</button>
-			</form>
-		
-			<!-- TODO ITEMs LIST -->
-			<h1>To Do Items</h1>
-			<ul class="list-group" id="todo-list">
-			<% todos.forEach(function(todo){ %>
-				<li class="list-group-item">
-					
-					<form action="/todos/<%=todo._id%>" method="POST" class="edit-item-form">
-						<div class="form-group">
-							<label for="<%=todo._id%>">Item Text</label>
-							<input type="text" value="<%= todo.text %>" name="todo[text]" class="form-control" id="<%=todo._id%>">
-						</div>
-						<button class="btn btn-primary">Update Item</button>
-					</form>
-					
-					<span class="lead">
-						<%= todo.text %>
-					</span>
-					<div class="pull-right">
-						<button class="btn btn-sm btn-warning edit-button">Edit</button>
-						<form id="delete-item" style="display: inline" method="POST" action="/todos/<%=todo._id%>" class="delete-item-form">
-							<button type="submit" class="btn btn-sm btn-danger">Delete</button>
-						</form>
+<!-- include partials/header -->
+<html>
+  <head>
+    <title>To Do App</title>
+    <link href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700' rel='stylesheet' type='text/css'>
+    <!-- Bootstrap CDN -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+    <link rel="stylesheet" href="/css/styles.css">
+  </head>
+  <body>
+    <!-- navbar -->
+    <nav class="navbar navbar-inverse navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+          </button>
+          <a class="navbar-brand" href="#">To Do App</a>
+        </div>
+        <div id="navbar" class="collapse navbar-collapse">
+          <form class="navbar-form navbar-left">
+            <div class="form-group">
+              <input type="text" class="form-control" id="search" placeholder="Search">
+            </div>
+          </form>
+        </div><!--/.nav-collapse -->
+      </div>
+    </nav>
+
+    <div class="container">
+<!-- include partials/header -->
+
+		<div class="row">
+			<div class="col-md-6 col-md-offset-3">
+				
+				<!-- NEW ITEM FORM -->
+				<h1>New Item</h1>
+				<form action="/todos" method="POST" id="new-todo-form">
+					<div class="form-group">
+						<label for="new-item-input">Item Text</label>
+						<input type="text" name="todo[text]" class="form-control" id="new-item-input" placeholder="Enter new task...">
 					</div>
-					<div class="clearfix"></div>
-				</li>
-			<% }); %>
-			</ul>
+					<button class="btn btn-primary">Create Item</button>
+				</form>
 			
-			
+				<!-- TODO ITEMs LIST -->
+				<h1>To Do Items</h1>
+				<ul class="list-group" id="todo-list">
+				</ul>
+					
+				<!--	OOOOLD !!!!!
+				<% todos.forEach(function(todo){ %>
+					<li class="list-group-item">
+						
+						<form action="/todos/<%=todo._id%>" method="POST" class="edit-item-form">
+							<div class="form-group">
+								<label for="<%=todo._id%>">Item Text</label>
+								<input type="text" value="<%= todo.text %>" name="todo[text]" class="form-control" id="<%=todo._id%>">
+							</div>
+							<button class="btn btn-primary">Update Item</button>
+						</form>
+						
+						<span class="lead">
+							<%= todo.text %>
+						</span>
+						<div class="pull-right">
+							<button class="btn btn-sm btn-warning edit-button">Edit</button>
+							<form id="delete-item" style="display: inline" method="POST" action="/todos/<%=todo._id%>" class="delete-item-form">
+								<button type="submit" class="btn btn-sm btn-danger">Delete</button>
+							</form>
+						</div>
+						<div class="clearfix"></div>
+					</li>
+				<% }); %>
+				</ul>
+				-->
+				
+				
+			</div>
 		</div>
-	</div>
 
-<% include partials/footer %>
+<!-- include partials/footer -->
+		</div>
+		<!-- /.container -->
+
+		<!-- jQuery CDN -->
+		<script src="https://code.jquery.com/jquery-3.1.1.min.js"
+						integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
+						crossorigin="anonymous"></script>
+						
+		<!-- AJAX JS -->
+		<script src="/js/ajax.js"></script>
+		
+	  <!-- Bootstrap CDN -->
+		<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" 
+						integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" 
+						crossorigin="anonymous"></script>        
+    </body>
+</html>
+<!-- include partials/footer -->
 
 

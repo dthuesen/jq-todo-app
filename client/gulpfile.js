@@ -7,7 +7,7 @@ gulp.task('default', () => {
     .pipe(babel({
       presets: ['es2015']
     }))
-    .pipe(gulp.dest('public/js'))
+    .pipe(gulp.dest('./js'))
     .pipe(connect.reload());
 });
 

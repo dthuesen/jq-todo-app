@@ -2,16 +2,12 @@ var express = require("express"),
     app     = express(),
     mongoose = require("mongoose"),
     bodyParser = require("body-parser"),
-    expressSanitizer = require("express-sanitizer"),
-    methodOverride = require('method-override');
+    expressSanitizer = require("express-sanitizer");
 
 mongoose.connect("mongodb://localhost/todo_app");
 
-app.use(express.static('public'));
 app.use(bodyParser.urlencoded({extended: true}));
 app.use(expressSanitizer());
-app.set("view engine", "ejs");
-app.use(methodOverride('_method'));
 
 var todoSchema = new mongoose.Schema({
   text: String,
