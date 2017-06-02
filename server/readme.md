@@ -1,8 +1,7 @@
 # Setup Instructions
 
-- Paste the following into your terminal - `git clone git@github.com:nax3t/ajax-jquery-tutorial.git`
-- Now `cd` into `ajax-jquery-tutorial` and run `npm install`
-- Start your mongo daemon `mongod` in a separate terminal tab
-- Install `nodemon` globally (if you don't already have it installed) with `npm i -g nodemon`
-- Run your application in its own terminal tab with `nodemon`
-- Navigate to `localhost:3000` in your browser
+- `npm i` in both directories server and client
+- cd into the 'server' directory and run the server with `nodemon` or `node app.js`
+- cd into the client directory and run the command `gulp` for making sure the app is transpiled 
+- then run an http server in the client directory e.g. with the command `python -m http.server 8000`
+- now open a browser on `http://localhost:8000` and the app should run without problems 

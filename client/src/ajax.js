@@ -4,13 +4,45 @@
 // })
 
 
+$.get('http://localhost:3000/todos', (todos) => {
+  todos.forEach( (todo) => {
+    $('#todo-list').append(
+      `
+      <li class="list-group-item">
+        <form action="/todos/${todo._id}" method="POST" class="edit-item-form">  
+						<div class="form-group">
+							<label for="${todo._id}">Item Text</label>
+							<input type="text" value="${todo.text}" name="todo[text]" class="form-control" id="${todo._id}">
+						</div>
+						<button class="btn btn-primary">Update Item</button>
+					</form>
+					
+					<span class="lead">
+            ${todo.text}
+					</span>
+					<div class="pull-right">
+						<button class="btn btn-sm btn-warning edit-button">Edit</button>
+						<form id="delete-item" style="display: inline" method="POST" action="/todos/${todo._id}" class="delete-item-form">
+							<button type="submit" class="btn btn-sm btn-danger">Delete</button>
+						</form>
+					</div>
+					<div class="clearfix"></div>
+        
+        </form>
+      </li>
+      `
+    );
+  });
+});
+
+
 
 /** ADDING A NEW ITEM */
 
 $('#new-todo-form').submit( function (e) {    // Arrow function does not work because of the this keyword
   e.preventDefault();
   let newTodoItem = $(this).serialize(); // transforms the object into a string with all the data from the form
-  $.post('/todos', newTodoItem, (data) => { // instead of 'data' as keyword 'response' is also often used
+  $.post('http://localhost:3000/todos', newTodoItem, (data) => { // instead of 'data' as keyword 'response' is also often used
     console.log("New item successfully submitted to the DB: ", data);
     
     $('#todo-list').append(
@@ -60,7 +92,7 @@ $('#todo-list').on('click', '.edit-button', function(e) {
 $('#todo-list').on('submit', '.edit-item-form', function (e) {    // Arrow function does not work because of the this keyword
   e.preventDefault();
   let formData = $(this).serialize();                           // transforms the object into a string with all the data from the form
-  let actionUrl = $(this).attr('action')                        // getting the id of the actual item, e.g. /todos/592d9e63e1f8601e87c83684
+  let actionUrl = 'http://localhost:3000' + $(this).attr('action');                       // getting the id of the actual item, e.g. /todos/592d9e63e1f8601e87c83684
   let $originalItem = $(this).parent('.list-group-item');
   $.ajax({
     url: actionUrl,
@@ -105,11 +137,11 @@ $('#todo-list').on('submit', '.delete-item-form', function (e) {    // Arrow fun
   let confirmResponse = confirm("Are you sure?");
   
   if(confirmResponse) {
-    let actionURL = $(this).attr('action'); // getting the id of the actual item, e.g. /todos/592d9e63e1f8601e87c83684
+    let actionUrl = 'http://localhost:3000' + $(this).attr('action'); // getting the id of the actual item, e.g. /todos/592d9e63e1f8601e87c83684
     let $itemToDelete = $(this).closest('.list-group-item');
     
     $.ajax({
-      url: actionURL,
+      url: actionUrl,
       type: 'DELETE',
       itemToDelete: $itemToDelete,
       success: function(data) {
